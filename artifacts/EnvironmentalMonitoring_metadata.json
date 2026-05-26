@@ -1,0 +1,1179 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "AccessControlBadConfirmation",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "neededRole",
+						"type": "bytes32"
+					}
+				],
+				"name": "AccessControlUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "AlertTriggered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ph",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "dissolvedOxygen",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "temperature",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "conductivity",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "turbidity",
+						"type": "uint256"
+					}
+				],
+				"name": "ReadingRecorded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "previousAdminRole",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "newAdminRole",
+						"type": "bytes32"
+					}
+				],
+				"name": "RoleAdminChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "RoleGranted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					}
+				],
+				"name": "RoleRevoked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "latitude",
+						"type": "int256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "longitude",
+						"type": "int256"
+					}
+				],
+				"name": "StationRegistered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "phMin",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "phMax",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "doMin",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "doMax",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tempMin",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tempMax",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "conductMin",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "conductMax",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "turbidMin",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "turbidMax",
+						"type": "uint256"
+					}
+				],
+				"name": "ThresholdsUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "ADMIN_ROLE",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "DEFAULT_ADMIN_ROLE",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "SENSOR_ORACLE_ROLE",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "alertCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "alertStation",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					}
+				],
+				"name": "getReadingsCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					}
+				],
+				"name": "getRoleAdmin",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					}
+				],
+				"name": "getStation",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "stationId_",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "latitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "longitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					}
+				],
+				"name": "getThresholds",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "phMin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "phMax",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "doMin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "doMax",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tempMin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tempMax",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "conductMin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "conductMax",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "turbidMin",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "turbidMax",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct EnvironmentalMonitoring.Thresholds",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "grantRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "grantSensorOracle",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "hasRole",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "isAlertValid",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "readings",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ph",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dissolvedOxygen",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "temperature",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "conductivity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "turbidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "evidenceHash",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ph",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "dissolvedOxygen",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "temperature",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "conductivity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "turbidity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "evidenceHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "recordReading",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "latitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "longitude",
+						"type": "int256"
+					}
+				],
+				"name": "registerStation",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "callerConfirmation",
+						"type": "address"
+					}
+				],
+				"name": "renounceRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "role",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "revokeRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "phMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "phMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "doMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "doMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tempMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tempMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "conductMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "conductMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "turbidMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "turbidMax",
+						"type": "uint256"
+					}
+				],
+				"name": "setThresholds",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "stationExists",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "stations",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "latitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "longitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "thresholds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "phMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "phMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "doMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "doMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tempMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tempMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "conductMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "conductMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "turbidMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "turbidMax",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Todos los valores de variables ambientales son enteros escalados ×100      (ej: pH 7.25 → 725, O₂ 4.80 → 480).",
+			"errors": {
+				"AccessControlBadConfirmation()": [
+					{
+						"details": "The caller of a function is not the expected one. NOTE: Don't confuse with {AccessControlUnauthorizedAccount}."
+					}
+				],
+				"AccessControlUnauthorizedAccount(address,bytes32)": [
+					{
+						"details": "The `account` is missing a role."
+					}
+				]
+			},
+			"events": {
+				"RoleAdminChanged(bytes32,bytes32,bytes32)": {
+					"details": "Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted to signal this."
+				},
+				"RoleGranted(bytes32,address,address)": {
+					"details": "Emitted when `account` is granted `role`. `sender` is the account that originated the contract call. This account bears the admin role (for the granted role). Expected in cases where the role was granted using the internal {AccessControl-_grantRole}."
+				},
+				"RoleRevoked(bytes32,address,address)": {
+					"details": "Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)"
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"getRoleAdmin(bytes32)": {
+					"details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
+				},
+				"getStation(string)": {
+					"details": "Retorna campos individuales (no el struct) para compatibilidad con IEnvironmentalMonitoring."
+				},
+				"grantRole(bytes32,address)": {
+					"details": "Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event."
+				},
+				"grantSensorOracle(address)": {
+					"params": {
+						"account": "Dirección que recibirá el rol."
+					}
+				},
+				"hasRole(bytes32,address)": {
+					"details": "Returns `true` if `account` has been granted `role`."
+				},
+				"isAlertValid(uint256)": {
+					"details": "Consumida por FinancialTraceability vía IEnvironmentalMonitoring.",
+					"params": {
+						"alertId": "ID de la alerta a verificar."
+					},
+					"returns": {
+						"_0": "true si la alerta existe (alertId < alertCount)."
+					}
+				},
+				"recordReading(string,uint256,uint256,uint256,uint256,uint256,uint256,bytes32)": {
+					"details": "Compara cada variable contra los umbrales configurados y emite         AlertTriggered por cada variable que supere su rango.",
+					"params": {
+						"conductivity": "Conductividad escalada ×100.",
+						"dissolvedOxygen": "Oxígeno disuelto escalado ×100.",
+						"evidenceHash": "Hash de evidencia IPFS u otro sistema externo.",
+						"ph": "pH escalado ×100 (ej: 725 = 7.25).",
+						"stationId": "Identificador de la estación.",
+						"temperature": "Temperatura escalada ×100.",
+						"timestamp": "Timestamp Unix de la lectura.",
+						"turbidity": "Turbidez escalada ×100."
+					}
+				},
+				"registerStation(string,string,int256,int256)": {
+					"params": {
+						"latitude": "Latitud escalada ×1e6.",
+						"longitude": "Longitud escalada ×1e6.",
+						"name": "Nombre descriptivo de la estación.",
+						"stationId": "Identificador único de la estación (string)."
+					}
+				},
+				"renounceRole(bytes32,address)": {
+					"details": "Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been revoked `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `callerConfirmation`. May emit a {RoleRevoked} event."
+				},
+				"revokeRole(bytes32,address)": {
+					"details": "Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event."
+				},
+				"setThresholds(string,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": {
+					"details": "Todos los valores son enteros escalados ×100. Requiere min < max para cada par."
+				},
+				"supportsInterface(bytes4)": {
+					"details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[ERC section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+				}
+			},
+			"title": "EnvironmentalMonitoring",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"ADMIN_ROLE()": {
+					"notice": "Rol de administrador — equivale a DEFAULT_ADMIN_ROLE de OpenZeppelin."
+				},
+				"SENSOR_ORACLE_ROLE()": {
+					"notice": "Rol que autoriza el envío de lecturas de sensores."
+				},
+				"alertCount()": {
+					"notice": "Contador global de alertas emitidas (también es el próximo alertId)."
+				},
+				"alertStation(uint256)": {
+					"notice": "Mapea alertId → stationId para que contratos externos validen alertas."
+				},
+				"constructor": {
+					"notice": "Despliega el contrato y asigna DEFAULT_ADMIN_ROLE al deployer."
+				},
+				"getReadingsCount(string)": {
+					"notice": "Retorna el número de lecturas almacenadas para una estación."
+				},
+				"getStation(string)": {
+					"notice": "Retorna los datos de una estación dado su identificador."
+				},
+				"getThresholds(string)": {
+					"notice": "Retorna los umbrales configurados para una estación."
+				},
+				"grantSensorOracle(address)": {
+					"notice": "Otorga el rol SENSOR_ORACLE_ROLE a una dirección."
+				},
+				"isAlertValid(uint256)": {
+					"notice": "Verifica si una alerta existe dado su ID."
+				},
+				"recordReading(string,uint256,uint256,uint256,uint256,uint256,uint256,bytes32)": {
+					"notice": "Registra una lectura de sensor para una estación existente."
+				},
+				"registerStation(string,string,int256,int256)": {
+					"notice": "Registra una nueva estación de monitoreo."
+				},
+				"setThresholds(string,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)": {
+					"notice": "Configura los umbrales de alerta para cada variable ambiental de una estación."
+				}
+			},
+			"notice": "Gestiona estaciones de monitoreo ambiental y lecturas de sensores IoT simulados         para el prototipo \"Río Cali Transparente\".",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/EnvironmentalMonitoring.sol": "EnvironmentalMonitoring"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/AccessControl.sol": {
+			"keccak256": "0x4686ec784d75f95beaf2bf5b5f26e5f946d4c864aaee9c3c62bdc18381f5e017",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://26710ca191913f3c9df542079c4a6dcff02968e92d4f7357daefef9fbe72a19c",
+				"dweb:/ipfs/QmanHbeWuBbVEqXySHa1zhm2rExjYpChDBubBaJNTCa2JB"
+			]
+		},
+		"@openzeppelin/contracts/access/IAccessControl.sol": {
+			"keccak256": "0xbff9f59c84e5337689161ce7641c0ef8e872d6a7536fbc1f5133f128887aba3c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b308f882e796f7b79c9502deacb0a62983035c6f6f4e962b319ba6a1f4a77d3d",
+				"dweb:/ipfs/QmaWCW7ahEQqFjwhSUhV7Ae7WhfNvzSpE7DQ58hvEooqPL"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0x2d9dc2fe26180f74c11c13663647d38e259e45f95eb88f57b61d2160b0109d3e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://81233d1f98060113d9922180bb0f14f8335856fe9f339134b09335e9f678c377",
+				"dweb:/ipfs/QmWh6R35SarhAn4z2wH8SU456jJSYL2FgucfTFgbHJJN4E"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x8891738ffe910f0cf2da09566928589bf5d63f4524dd734fd9cedbac3274dd5c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://971f954442df5c2ef5b5ebf1eb245d7105d9fbacc7386ee5c796df1d45b21617",
+				"dweb:/ipfs/QmadRjHbkicwqwwh61raUEapaVEtaLMcYbQZWs9gUkgj3u"
+			]
+		},
+		"contracts/EnvironmentalMonitoring.sol": {
+			"keccak256": "0xbbf2fcb357307408e0bf59da66fe54f67df8283ad2cf27b3fc0c9e272ec31690",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b95bec94a82209a9dd32600a6843b5913384e816dd43a8300aa222297b7d9336",
+				"dweb:/ipfs/QmWFnnTvBqqK87VrXeg7Ghs5foh48yXTgYUvnco2XDkYsA"
+			]
+		},
+		"contracts/interfaces/IEnvironmentalMonitoring.sol": {
+			"keccak256": "0x046b761d9c93c8fd78fc70bbbfdb125bcf70cbbf6aee39a41303010bd67e42ca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a0e4489902276582703b2d808cc333e90251c02ddc00056a3c2791ef321c377c",
+				"dweb:/ipfs/QmZwTWWukcUJC7CTVtpfqxXZwDvN5ifFLmFzw7Bb2MfJeE"
+			]
+		}
+	},
+	"version": 1
+}

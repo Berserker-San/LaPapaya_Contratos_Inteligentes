@@ -1,0 +1,745 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "mockCOPToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_governanceDAO",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_environmentalMonitoring",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ReentrancyGuardReentrantCall",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "itemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "allocatedAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "BudgetItemCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "disbursementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "proposalId",
+						"type": "uint256"
+					}
+				],
+				"name": "DisbursementExecuted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "disbursementId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "budgetItemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "DisbursementRequested",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "depositor",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "newVaultBalance",
+						"type": "uint256"
+					}
+				],
+				"name": "FundsDeposited",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "TOTAL_BUDGET",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "budgetItemCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "budgetItems",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "allocatedAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "spentAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "allocatedAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "createBudgetItem",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "disbursementCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "disbursements",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "budgetItemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "justification",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "proposalId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum FinancialTraceability.DisbursementStatus",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "disbursementId",
+						"type": "uint256"
+					}
+				],
+				"name": "executeDisbursement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "disbursementId",
+						"type": "uint256"
+					}
+				],
+				"name": "getDisbursement",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "budgetItemId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "beneficiary",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "justification",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "alertId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "proposalId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum FinancialTraceability.DisbursementStatus",
+								"name": "status",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct FinancialTraceability.DisbursementRequest",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getVaultBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "budgetItemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "justification",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "proposalId",
+						"type": "uint256"
+					}
+				],
+				"name": "requestDisbursement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Hereda Ownable y ReentrancyGuard de OpenZeppelin v5.      Solo para uso en prototipo — NO representa fondos reales.",
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				],
+				"ReentrancyGuardReentrantCall()": [
+					{
+						"details": "Unauthorized reentrant call."
+					}
+				]
+			},
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"params": {
+						"_environmentalMonitoring": "Dirección del contrato EnvironmentalMonitoring.",
+						"_governanceDAO": "Dirección del contrato GovernanceDAO.",
+						"mockCOPToken": "Dirección del contrato MockCOPToken (ERC20)."
+					}
+				},
+				"createBudgetItem(string,string,uint256)": {
+					"details": "Solo el owner puede llamar esta función.",
+					"params": {
+						"allocatedAmount": "Monto asignado al rubro en unidades de MockCOPToken.",
+						"description": "Descripción del rubro.",
+						"name": "Nombre del rubro."
+					}
+				},
+				"deposit(uint256)": {
+					"details": "El caller debe haber llamado `approve(address(this), amount)` en MockCOPToken      antes de invocar esta función. Protegida con nonReentrant.",
+					"params": {
+						"amount": "Cantidad de tokens a depositar."
+					}
+				},
+				"executeDisbursement(uint256)": {
+					"details": "Solo el owner puede ejecutar desembolsos. Protegida con nonReentrant.",
+					"params": {
+						"disbursementId": "ID de la solicitud de desembolso a ejecutar."
+					}
+				},
+				"getDisbursement(uint256)": {
+					"params": {
+						"disbursementId": "ID de la solicitud a consultar."
+					},
+					"returns": {
+						"_0": "Struct DisbursementRequest con todos los campos de la solicitud."
+					}
+				},
+				"getVaultBalance()": {
+					"returns": {
+						"_0": "Saldo del vault en unidades de MockCOPToken."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"requestDisbursement(uint256,uint256,address,string,uint256,uint256)": {
+					"details": "Solo el owner puede crear solicitudes.",
+					"params": {
+						"alertId": "ID de la alerta ambiental validada asociada.",
+						"amount": "Monto a desembolsar en unidades de MockCOPToken.",
+						"beneficiary": "Dirección receptora de los fondos.",
+						"budgetItemId": "ID del rubro de gasto asociado.",
+						"justification": "Justificación textual del desembolso.",
+						"proposalId": "ID de la propuesta DAO aprobada asociada."
+					}
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "FinancialTraceability",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"BudgetItemCreated(uint256,string,uint256)": {
+					"notice": "Emitido cuando se crea un nuevo rubro de gasto."
+				},
+				"DisbursementExecuted(uint256,address,uint256,uint256,uint256)": {
+					"notice": "Emitido cuando se ejecuta exitosamente un desembolso."
+				},
+				"DisbursementRequested(uint256,uint256,address,uint256)": {
+					"notice": "Emitido cuando se registra una solicitud de desembolso."
+				},
+				"FundsDeposited(address,uint256,uint256)": {
+					"notice": "Emitido cuando se depositan fondos en el vault."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"TOTAL_BUDGET()": {
+					"notice": "Presupuesto total del sistema en unidades de MockCOPToken."
+				},
+				"budgetItemCount()": {
+					"notice": "Contador de rubros creados (también sirve como próximo ID)."
+				},
+				"budgetItems(uint256)": {
+					"notice": "Rubros de gasto indexados por ID (1-based)."
+				},
+				"constructor": {
+					"notice": "Despliega el vault con las referencias a los contratos dependientes."
+				},
+				"createBudgetItem(string,string,uint256)": {
+					"notice": "Crea un nuevo rubro de gasto en el presupuesto."
+				},
+				"deposit(uint256)": {
+					"notice": "Deposita tokens MockCOPToken en el vault."
+				},
+				"disbursementCount()": {
+					"notice": "Contador de solicitudes de desembolso (también sirve como próximo ID)."
+				},
+				"disbursements(uint256)": {
+					"notice": "Solicitudes de desembolso indexadas por ID (1-based)."
+				},
+				"executeDisbursement(uint256)": {
+					"notice": "Ejecuta un desembolso pendiente si se cumplen ambas condiciones:         (A) la alerta ambiental es válida y (B) la propuesta DAO está aprobada."
+				},
+				"getDisbursement(uint256)": {
+					"notice": "Retorna los datos completos de una solicitud de desembolso."
+				},
+				"getVaultBalance()": {
+					"notice": "Retorna el saldo actual de MockCOPToken en el vault."
+				},
+				"requestDisbursement(uint256,uint256,address,string,uint256,uint256)": {
+					"notice": "Registra una solicitud de desembolso con estado Pendiente."
+				}
+			},
+			"notice": "Vault de trazabilidad financiera para el prototipo \"Río Cali Transparente\".         Gestiona fondos MockCOPToken y controla desembolsos condicionados a validación         ambiental (IEnvironmentalMonitoring) y aprobación de gobernanza (IGovernanceDAO).",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/FinancialTraceability.sol": "FinancialTraceability"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x74ed01eb66b923d0d0cfe3be84604ac04b76482a55f9dd655e1ef4d367f95bc2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5282825a626cfe924e504274b864a652b0023591fa66f06a067b25b51ba9b303",
+				"dweb:/ipfs/QmeCfPykghhMc81VJTrHTC7sF6CRvaA1FXVq2pJhwYp1dV"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/ReentrancyGuard.sol": {
+			"keccak256": "0xa516cbf1c7d15d3517c2d668601ce016c54395bf5171918a14e2686977465f53",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1e1d079e8edfb58efd23a311e315a4807b01b5d1cf153f8fa2d0608b9dec3e99",
+				"dweb:/ipfs/QmTBExeX2SDTkn5xbk5ssbYSx7VqRp9H4Ux1CY4uQM4b9N"
+			]
+		},
+		"@openzeppelin/contracts/utils/StorageSlot.sol": {
+			"keccak256": "0xcf74f855663ce2ae00ed8352666b7935f6cddea2932fdf2c3ecd30a9b1cd0e97",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9f660b1f351b757dfe01438e59888f31f33ded3afcf5cb5b0d9bf9aa6f320a8b",
+				"dweb:/ipfs/QmarDJ5hZEgBtCmmrVzEZWjub9769eD686jmzb2XpSU1cM"
+			]
+		},
+		"contracts/FinancialTraceability.sol": {
+			"keccak256": "0xe654a0d4ccb7fc457037f8dd3cc2baf8c312c342ad04bac7d5459f08e7bf88f7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://da650354b77a5101717096ad852a375f52bcc8dd22d9d7603b322f629d0ca70d",
+				"dweb:/ipfs/QmRJxpqrLKFLWYmYQ9PyLTBFfFdsQoDp8iJ6z3qxdGrguS"
+			]
+		},
+		"contracts/interfaces/IEnvironmentalMonitoring.sol": {
+			"keccak256": "0x046b761d9c93c8fd78fc70bbbfdb125bcf70cbbf6aee39a41303010bd67e42ca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a0e4489902276582703b2d808cc333e90251c02ddc00056a3c2791ef321c377c",
+				"dweb:/ipfs/QmZwTWWukcUJC7CTVtpfqxXZwDvN5ifFLmFzw7Bb2MfJeE"
+			]
+		},
+		"contracts/interfaces/IGovernanceDAO.sol": {
+			"keccak256": "0xe59e884b5e3d5041a3b58f13c917d5072e14b4c3ff6006e467e43c4484bc752c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2738c0010583f5e12b323e6a538a83b28a99d9219abb6f91b71759c2a133ef5a",
+				"dweb:/ipfs/QmccCfCsush4AS24sWLPTXXChKRTnxzE7WMrnsCTRBGYQD"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,471 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "environmentalMonitoring",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "baselineValue",
+						"type": "uint256"
+					}
+				],
+				"name": "BaselineRegistered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "baselineValue",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "outcomeValue",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "int256",
+						"name": "improvementPct",
+						"type": "int256"
+					}
+				],
+				"name": "ClimateImpactClaimCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "outcomeValue",
+						"type": "uint256"
+					}
+				],
+				"name": "OutcomeRegistered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					}
+				],
+				"name": "emitClimateImpactClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					}
+				],
+				"name": "getRecord",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "baseline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "outcome",
+						"type": "uint256"
+					},
+					{
+						"internalType": "int256",
+						"name": "improvementPct",
+						"type": "int256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"name": "records",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "baselineValue",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "outcomeValue",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "hasBaseline",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "hasOutcome",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "registerBaseline",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "registerOutcome",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "AVISO: Este contrato NO emite créditos de carbono reales ni afirma certificación      VCS. El evento ClimateImpactClaimCreated es exclusivamente una simulación para      demostrar la lógica de trazabilidad en Remix IDE con VM local. Hereda de Ownable (OpenZeppelin v5). Todas las funciones de escritura están restringidas al owner (deployer).",
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
+			"events": {
+				"BaselineRegistered(string,string,uint256)": {
+					"details": "Los parámetros string indexed se almacenan como keccak256 del string,      lo que permite filtrado eficiente en el log de Remix IDE."
+				},
+				"ClimateImpactClaimCreated(string,string,uint256,uint256,int256)": {
+					"details": "improvementPct puede ser negativo si el outcome es peor que el baseline."
+				}
+			},
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"params": {
+						"environmentalMonitoring": "Dirección del contrato EnvironmentalMonitoring.        No puede ser address(0)."
+					}
+				},
+				"emitClimateImpactClaim(string,string)": {
+					"details": "Requiere que tanto la línea base como el outcome estén registrados y      que el baseline sea mayor que cero.      Fórmula: improvement = ((outcome - baseline) * 100) / baseline      Un valor positivo indica mejora; negativo indica degradación.",
+					"params": {
+						"stationId": "Identificador de la estación de monitoreo.",
+						"variable": "Nombre de la variable ambiental."
+					}
+				},
+				"getRecord(string,string)": {
+					"params": {
+						"stationId": "Identificador de la estación de monitoreo.",
+						"variable": "Nombre de la variable ambiental."
+					},
+					"returns": {
+						"baseline": "      Valor de línea base escalado ×100.",
+						"improvementPct": "Porcentaje de mejora (puede ser negativo).",
+						"outcome": "       Valor de resultado post-intervención escalado ×100."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"registerBaseline(string,string,uint256)": {
+					"params": {
+						"stationId": "Identificador de la estación de monitoreo.",
+						"value": "Valor escalado ×100 (ej: pH 7.25 → 725).",
+						"variable": "Nombre de la variable ambiental (ej: \"dissolvedOxygen\")."
+					}
+				},
+				"registerOutcome(string,string,uint256)": {
+					"params": {
+						"stationId": "Identificador de la estación de monitoreo.",
+						"value": "Valor escalado ×100.",
+						"variable": "Nombre de la variable ambiental."
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "SustainabilityClimate",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"BaselineRegistered(string,string,uint256)": {
+					"notice": "Emitido cuando se registra una línea base."
+				},
+				"ClimateImpactClaimCreated(string,string,uint256,uint256,int256)": {
+					"notice": "Emitido cuando se crea un claim climático con el porcentaje de mejora."
+				},
+				"OutcomeRegistered(string,string,uint256)": {
+					"notice": "Emitido cuando se registra un resultado post-intervención."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"emitClimateImpactClaim(string,string)": {
+					"notice": "Calcula el porcentaje de mejora y emite un claim climático."
+				},
+				"getRecord(string,string)": {
+					"notice": "Retorna la línea base, el outcome y el porcentaje de mejora calculado         para una estación y variable dados. Casos de retorno:  - Sin baseline ni outcome → (0, 0, 0)  - Solo baseline           → (baselineValue, 0, 0)  - Ambos y baseline > 0    → (baselineValue, outcomeValue, improvementPct)  - Ambos y baseline == 0   → (0, outcomeValue, 0)"
+				},
+				"records(bytes32)": {
+					"notice": "Almacena registros ambientales indexados por         keccak256(abi.encodePacked(stationId, variable))."
+				},
+				"registerBaseline(string,string,uint256)": {
+					"notice": "Registra la línea base ambiental para una estación y variable."
+				},
+				"registerOutcome(string,string,uint256)": {
+					"notice": "Registra el resultado post-intervención para una estación y variable."
+				}
+			},
+			"notice": "Conecta resultados ambientales con indicadores de sostenibilidad y emite         claims climáticos verificables para el prototipo \"Río Cali Transparente\".",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/SustainabilityClimate.sol": "SustainabilityClimate"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"contracts/SustainabilityClimate.sol": {
+			"keccak256": "0xfa3af83f8a2de30a9e7274d7f309fbcc049844fdfa91ec31312da7b3cfa09733",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://871ae822f1f5db21b1b56d5cbf7f8c8245c017b519b3fca044dcebee80115f5b",
+				"dweb:/ipfs/QmTrU2CVb2CfnhTrZg4aFFNw79FxCY3CWQTFs5CcFf4867"
+			]
+		},
+		"contracts/interfaces/IEnvironmentalMonitoring.sol": {
+			"keccak256": "0x046b761d9c93c8fd78fc70bbbfdb125bcf70cbbf6aee39a41303010bd67e42ca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a0e4489902276582703b2d808cc333e90251c02ddc00056a3c2791ef321c377c",
+				"dweb:/ipfs/QmZwTWWukcUJC7CTVtpfqxXZwDvN5ifFLmFzw7Bb2MfJeE"
+			]
+		}
+	},
+	"version": 1
+}
