@@ -308,6 +308,39 @@ contract GovernanceDAO is AccessControl, IGovernanceDAO {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
+    // Función de prueba — forceFinalize (solo prototipo)
+    // ─────────────────────────────────────────────────────────────────────────
+
+    /**
+     * @notice Fuerza la finalización de una propuesta sin esperar el período de votación.
+     * @dev SOLO PARA PROTOTIPO EN REMIX VM. No incluir en producción.
+     *      Permite al Admin aprobar o rechazar una propuesta manualmente.
+     * @param proposalId ID de la propuesta a finalizar.
+     * @param approve    true = marcar como Aprobada, false = marcar como Rechazada.
+     */
+    function forceFinalize(uint256 proposalId, bool approve)
+        external
+        onlyRole(ADMIN_ROLE)
+    {
+        require(
+            proposalId > 0 && proposalId <= proposalCount,
+            "GovernanceDAO: propuesta no existe"
+        );
+        Proposal storage proposal = proposals[proposalId];
+        require(!proposal.finalized, "GovernanceDAO: la propuesta ya fue finalizada");
+
+        proposal.status    = approve ? ProposalStatus.Approved : ProposalStatus.Rejected;
+        proposal.finalized = true;
+
+        emit ProposalFinalized(
+            proposalId,
+            proposal.status,
+            proposal.votesFor,
+            proposal.votesAgainst
+        );
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
     // Task 4.9 — isProposalApproved (IGovernanceDAO)
     // ─────────────────────────────────────────────────────────────────────────
 

@@ -1,0 +1,104 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "stationId",
+						"type": "string"
+					}
+				],
+				"name": "getStation",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "stationId_",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "int256",
+						"name": "latitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "int256",
+						"name": "longitude",
+						"type": "int256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "alertId",
+						"type": "uint256"
+					}
+				],
+				"name": "isAlertValid",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interfaces/IEnvironmentalMonitoring.sol": "IEnvironmentalMonitoring"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IEnvironmentalMonitoring.sol": {
+			"keccak256": "0x046b761d9c93c8fd78fc70bbbfdb125bcf70cbbf6aee39a41303010bd67e42ca",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a0e4489902276582703b2d808cc333e90251c02ddc00056a3c2791ef321c377c",
+				"dweb:/ipfs/QmZwTWWukcUJC7CTVtpfqxXZwDvN5ifFLmFzw7Bb2MfJeE"
+			]
+		}
+	},
+	"version": 1
+}
