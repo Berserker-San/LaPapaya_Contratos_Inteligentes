@@ -440,5 +440,3 @@ Este prototipo fue desarrollado con fines exclusivamente educativos y de demostr
 - El uso de `block.timestamp` para períodos de votación es adecuado para prototipo en VM local, pero no es seguro para producción.
 
 Para una implementación en producción se requeriría: auditoría de seguridad, oráculos certificados, integración con sistemas de identidad, cumplimiento regulatorio ambiental colombiano, y certificación por un organismo acreditado.
-#   L a P a p a y a _ C o n t r a t o s _ I n t e l i g e n t e s  
- 
